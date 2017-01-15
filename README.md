@@ -4,7 +4,7 @@ Server Sent Events example
 Sample app demonstrating [Server Sent Events](https://www.html5rocks.com/en/tutorials/eventsource/basics/)
 using Java Servlets.
 
-# Build
+# Run
 
 `mvn jetty:run`
 
