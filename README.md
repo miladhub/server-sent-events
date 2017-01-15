@@ -4,6 +4,8 @@ Server Sent Events example
 Sample app demonstrating [Server Sent Events](https://www.html5rocks.com/en/tutorials/eventsource/basics/)
 using Java Servlets.
 
+This app runs on all major browsers -- IE 11+ is covered by this polyfill: <https://github.com/Yaffle/EventSource>.
+
 # Run
 
 `mvn jetty:run`
