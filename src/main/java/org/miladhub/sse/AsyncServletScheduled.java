@@ -29,11 +29,10 @@ public class AsyncServletScheduled extends HttpServlet {
                 AsyncContext ac = iterator.next();
                 Random random = new Random();
                 final ServletResponse res = ac.getResponse();
-                PrintWriter out;
                 try {
-                    out = res.getWriter();
                     int id = random.nextInt(100) + 1;
                     System.out.println("sending event #" + id);
+                    PrintWriter out = res.getWriter();
                     out.write("id: " + id + "\n");
                     out.write("data: " + String.valueOf(id) + ", num of clients = " + longReqs.size() + "\n\n");
                     //checkError calls flush,
