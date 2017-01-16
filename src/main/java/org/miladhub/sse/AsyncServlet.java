@@ -20,24 +20,23 @@ public class AsyncServlet extends HttpServlet {
 
         final AsyncContext asyncContext = request.startAsync(request, response);
 
-        asyncContext.start(new Runnable() {
-            public void run() {
-                try {
-                    PrintWriter writer = asyncContext.getResponse().getWriter();
-                    for (int i = 0; i < 1000; i++) {
-                        writer.write("id: " + i + "\n");
-                        writer.write("data: " + System.currentTimeMillis() + "\n\n");
-                        writer.flush();
-                        Thread.sleep(1000);
-                    }
-                    writer.close();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                } finally {
-                    asyncContext.complete();
+        asyncContext.start(() -> {
+            try {
+                PrintWriter writer = asyncContext.getResponse().getWriter();
+                for (int i = 0; i < 1000; i++) {
+                    System.out.println("sending event #" + i);
+                    writer.write("id: " + i + "\n");
+                    writer.write("data: " + System.currentTimeMillis() + "\n\n");
+                    writer.flush();
+                    Thread.sleep(1000);
                 }
+                writer.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } finally {
+                asyncContext.complete();
             }
         });
     }

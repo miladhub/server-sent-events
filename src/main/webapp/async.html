@@ -8,8 +8,13 @@
 <body>
 <script>
     var source = new EventSource('AsyncServlet');
+    var last;
     source.onmessage = function(e) {
+        last = e.lastEventId;
         document.body.innerHTML += e.data + '<br>';
+    };
+    source.onerror = function(e) {
+        console.log("lost connection with the back end, last ID was " + last);
     };
 </script>
 </body>

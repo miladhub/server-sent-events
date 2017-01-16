@@ -21,6 +21,7 @@ public class SyncServlet extends HttpServlet {
         PrintWriter writer = response.getWriter();
 
         for (int i = 0; i < 1000; i++) {
+            System.out.println("sending event #" + i);
             writer.write("id: " + i + "\n");
             writer.write("data: " + System.currentTimeMillis() + "\n\n");
             writer.flush();

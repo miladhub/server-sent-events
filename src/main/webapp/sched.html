@@ -7,7 +7,7 @@
 </head>
 <body>
 <script>
-    var source = new EventSource('SyncServlet');
+    var source = new EventSource('AsyncServletScheduled');
     var last;
     source.onmessage = function(e) {
         last = e.lastEventId;
