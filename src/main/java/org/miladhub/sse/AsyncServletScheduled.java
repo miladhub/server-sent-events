@@ -18,7 +18,6 @@ import java.util.concurrent.TimeUnit;
 @WebServlet(value = "/AsyncServletScheduled", asyncSupported = true)
 public class AsyncServletScheduled extends HttpServlet {
     private final Queue<AsyncContext> longReqs = new ConcurrentLinkedQueue<>();
-    private ScheduledExecutorService service;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -45,7 +44,7 @@ public class AsyncServletScheduled extends HttpServlet {
                 }
             }
         };
-        service = Executors.newScheduledThreadPool(10);
+        ScheduledExecutorService service = Executors.newScheduledThreadPool(10);
         service.scheduleAtFixedRate(notifier, 1, 1, TimeUnit.SECONDS);
     }
 
